@@ -21,5 +21,6 @@ function validate(genre) {
   const result = genreValidator.validate(genre);
   return result;
 }
+module.exports.genreSchema = genreSchema;
 module.exports.Genre = Genre;
 module.exports.validate = validate;
