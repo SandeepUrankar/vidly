@@ -1,12 +1,6 @@
 const Joi = require("joi");
 const dbDebugger = require("debug")("app:db");
 const mongoose = require("mongoose");
-const MONGO_URI = process.env.MONGO_URI;
-
-mongoose
-  .connect(MONGO_URI)
-  .then(() => dbDebugger("Connected to DB..."))
-  .catch((err) => dbDebugger("Error", err));
 
 const customerSchema = mongoose.Schema({
   isGold: { type: mongoose.Schema.Types.Boolean, default: false },
