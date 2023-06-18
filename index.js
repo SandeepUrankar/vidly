@@ -12,9 +12,14 @@ const customers = require("./routes/customers");
 const movies = require("./routes/movies");
 const rentals = require("./routes/rentals");
 const users = require("./routes/users");
+const auth = require("./routes/auth");
 const connectDB = require("./db/db");
 app.use(express.json());
 
+if (!process.env.VIDLY_JWT_SECRET) {
+  console.error(`FATAL ERROR: JWT_SECRET is not set.`);
+  process.exit(1);
+}
 if (app.get("env") === "development") {
   app.use(
     morgan("tiny", {
@@ -36,6 +41,7 @@ app.use("/api/customers", customers);
 app.use("/api/movies", movies);
 app.use("/api/rentals", rentals);
 app.use("/api/users", users);
+app.use("/api/auth", auth);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => startupDebugger("Listening on port " + port));
